@@ -1,6 +1,8 @@
-import React from 'react'
+import PropTypes from 'prop-types'
 
 export const Characters = ({name, image}) => {
+
+
   return (
    
        <div className="character-container">
@@ -9,4 +11,9 @@ export const Characters = ({name, image}) => {
        </div>
    
   )
+}
+
+Characters.protoTypes = {
+  name: PropTypes.string.isRequired,
+  image: PropTypes.string.isRequired,
 }
