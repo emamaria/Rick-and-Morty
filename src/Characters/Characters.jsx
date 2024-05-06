@@ -13,7 +13,7 @@ export const Characters = ({name, image}) => {
   )
 }
 
-Characters.protoTypes = {
+Characters.protTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
 }
