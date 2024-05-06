@@ -1,0 +1,11 @@
+h1{
+    color: #674747;
+    font-size: 100px;
+    font-style: italic;
+}
+
+@media only screen and (max-width: 600px) {
+    h1 {
+        font-size: 50px;
+    }
+  }
