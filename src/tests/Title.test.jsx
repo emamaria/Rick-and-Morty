@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { render} from "@testing-library/react";
 import { Title } from "../Title/Title";
 
@@ -9,4 +10,6 @@ describe('test <Title/>', () => {
         const {container} = render(<Title/>)
         expect(container).toMatchSnapshot()
     })
+
+    
 });
