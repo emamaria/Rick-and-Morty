@@ -27,7 +27,7 @@ describe('test <App/>', () => {
        
     })
 
-    test('should show images when page is loaded', async() => {
+    test('should show Prev button when click Next Button', async() => {
 
         render(<App/>)
         const buttonNext = screen.getByText(Next)
