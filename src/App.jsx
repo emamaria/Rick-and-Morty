@@ -43,7 +43,7 @@ function App() {
  <div className="character-big-container" >
     {
       characters&&characters.map(character => {
-         return <Characters key={character.id} name={character.name}  image={character.image}/>
+         return <Characters key={character.id} name={character.name}  image={character.image} id={character.id}/>
       })
       
     }
