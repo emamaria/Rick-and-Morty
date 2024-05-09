@@ -2,6 +2,6 @@ import React from 'react'
 
 export const Title = () => {
   return (
-    <h1>Rick And Morty</h1>
+    <h1 data-testid="title">Rick And Morty</h1>
   )
 }

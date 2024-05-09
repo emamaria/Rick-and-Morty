@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className="App">
-    <Title/>
+    <Title />
 
 {(page > 1)&&<Button buttonName="Prev" onClick={()=> setPage(page - 1)}/>}
  {(page < 43)&&<Button buttonName="Next" onClick={()=> setPage(page + 1)}/>} 
