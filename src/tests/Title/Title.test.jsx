@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import { render} from "@testing-library/react";
-import { Title } from "../Title/Title";
+import {Title} from "../../Title/Title"
 
 describe('test <Title/>', () => {
     
