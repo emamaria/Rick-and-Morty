@@ -64,7 +64,7 @@ describe('Rick and Morty first page test', () => {
         })
      })
 
-     it('shows 20 images after every click and not show Next button in last page', () => {
+     it('shows 20 images after every click in Next button and will not show Next button in last page', () => {
      
 
 
