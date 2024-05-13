@@ -1,4 +1,4 @@
-describe('Rick and Morty First Page Test', () => {
+describe('Rick and Morty first page test', () => {
 
   
   beforeEach(() => {
@@ -32,17 +32,15 @@ describe('Rick and Morty First Page Test', () => {
 
        })
      
-      
-
+    
     })
        
 
   })
 
-  describe.only('Rick and Morty rest of pages testing', () => {
+  describe('Rick and Morty from second page test', () => {
 
-
-         
+     
      beforeEach(() => {
          cy.visit('http://localhost:5173/')
       })
@@ -53,34 +51,41 @@ describe('Rick and Morty First Page Test', () => {
         cy.contains('Prev').should('exist')
      })
 
-     it('shows 20 images after every click in Next button until this button dissapears', () => {
-           
-      let buttonsNumbers;
-      cy.contains('Next').click()
+     it('does correct request and response when click next button', () => {
+        cy.intercept('GET', `https://rickandmortyapi.com/api/character?page=2`).as('getCharacters')
+        cy.contains('Next').click()
+        cy.wait('@getCharacters')
+        cy.get('@getCharacters').then(http => {
+          expect(http.response.statusCode).to.equal(200)
+          expect(http.response.body.results.length).to.equal(20)
+          expect(http.response.body.results[0]).to.have.property('id')
+          expect(http.response.body.results[0]).to.have.property('image')
+          expect(http.response.body.results[0]).to.have.property('name')
+        })
+     })
 
-       cy.get('button').then( buttons => {
-        buttonsNumbers = cy.wrap(buttons).length
-         while(buttonsNumbers === 2){
-          cy.contains('Next').click()
-          cy.wait(1000)
-          cy.get('img').should('have.length', 20)
-          buttonsNumbers = cy.get('buttons').length
-          console.log("ema", buttonsNumbers)
-          cy.contains('Next').click()
-         }
-       })
+     it('shows 20 images after every click and not show Next button in last page', () => {
+     
+
+
+       cy.request('GET', `https://rickandmortyapi.com/api/character`).then(resp => {
         
-        //  const buttonsNumbers =  cy.get('button').length
-      //  const NextButton = cy.contains('Next').should('exist')
-      //  console.log(NextButton)
+       const createArray = N  => Array.from({length: N}, (_, index) => index + 1);
+
+       const totalPages = createArray(resp.body.info.pages)
        
-      //  while(cy.contains('Next')){
-      //      console.log("ema")
-      //  }
-      //   if(NextButton){
-      //   NextButton.click()
-      //   cy.get('img').should('have.length', 20)
-      // }
+        cy.wrap(totalPages).each(() => {
+
+            cy.get('img').should('have.length', 20)
+            cy.contains('Next').click()
+           
+        }) 
+
+        cy.contains('Next').should('not.exist')
+
+       })
+    
+  
        
      })
       
