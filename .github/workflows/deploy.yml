@@ -14,7 +14,7 @@ jobs:
         run: npm ci
       - name: Run linter
         run: npm run lint
-  test:
+  jest-run:
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -27,3 +27,13 @@ jobs:
         run: npm ci
       - name: Test code
         run: npm run test
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
