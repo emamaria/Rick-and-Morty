@@ -1,5 +1,5 @@
-/* eslint-disable no-undef */
-import { render, screen,fireEvent, getByTestId } from "@testing-library/react"
+
+import { render, screen,fireEvent } from "@testing-library/react"
 import App from "../App"
 
 

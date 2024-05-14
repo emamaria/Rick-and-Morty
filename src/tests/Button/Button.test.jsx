@@ -1,11 +1,12 @@
 import { fireEvent, render, screen } from "@testing-library/react"
 import { Button } from "../../Button/Button"
-import { Children } from "react"
+
 
 
 describe('test <Button/>', () => {
 
     const buttonName = "Next"
+    // eslint-disable-next-line no-undef
     const clickFunc = jest.fn()
  
 
