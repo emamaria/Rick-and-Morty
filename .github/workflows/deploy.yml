@@ -1,0 +1,8 @@
+name: Deployment
+on: workflow_dispatch
+jobs:
+  demo-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Word
+        run: echo 'demo'
