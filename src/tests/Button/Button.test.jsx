@@ -26,7 +26,7 @@ describe('test <Button/>', () => {
         fireEvent.click(button)
         fireEvent.click(button)
         expect(clickFunc).toHaveBeenCalled()
-        expect(clickFunc).toHaveBeenCalledTimes(1)
+        expect(clickFunc).toHaveBeenCalledTimes(2)
     })
 
    
