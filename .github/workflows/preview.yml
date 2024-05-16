@@ -46,6 +46,7 @@ jobs:
           build: npm run build
           start: npm start
   deploy-preview:
+    needs: [lint, jest-run, cypress-run]
     runs-on: ubuntu-latest
     steps:
       - name: Get code
