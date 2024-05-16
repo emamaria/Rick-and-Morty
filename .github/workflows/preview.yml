@@ -58,4 +58,8 @@ jobs:
       - name: build
         run: vercel build --token=${{secrets.VERCEL_TOKEN }}
       - name: deploy
+        id: dep
         run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN }}
+      - name: Output information
+        run: |
+          echo "Live URL: ${{steps.dep.outputs}}"
