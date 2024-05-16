@@ -9,6 +9,42 @@ on:
       - main
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run linter
+        run: npm run lint
+  jest-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install Dependencies
+        run: npm ci
+      - name: Test code
+        run: npm run test
+  cypress-run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: npm start
   deploy-preview:
     runs-on: ubuntu-latest
     steps:
