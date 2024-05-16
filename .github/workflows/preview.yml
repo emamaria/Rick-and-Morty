@@ -62,4 +62,4 @@ jobs:
         run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN }}
       - name: Output information
         run: |
-          echo "Live URL: ${{steps.dep.outputs}}"
+          echo "Live URL: ${{steps.dep.outputs.Production}}"
