@@ -60,5 +60,3 @@ jobs:
       - name: deploy
         id: dep
         run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN }}
-      - name: Output information
-        run: echo "${{ toJSON(github) }}"
