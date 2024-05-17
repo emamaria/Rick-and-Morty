@@ -48,8 +48,6 @@ jobs:
   deploy-preview:
     needs: [lint, jest-run, cypress-run]
     runs-on: ubuntu-latest
-    outputs:
-      url: ${{steps.dep.outputs}}
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -63,5 +61,4 @@ jobs:
         id: dep
         run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN }}
       - name: Output information
-        run: |
-          echo 'url={}' >> $GITHUB_OUTPUT ';'
+        run: echo "${{steps.dep.outputs}}"
