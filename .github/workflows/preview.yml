@@ -48,8 +48,6 @@ jobs:
   deploy-preview:
     needs: [lint, jest-run, cypress-run]
     runs-on: ubuntu-latest
-    outputs:
-      deploy-data: ${{steps.dep.outputs.data}}
     steps:
       - name: Get code
         uses: actions/checkout@v4
@@ -61,6 +59,6 @@ jobs:
         run: vercel build --token=${{secrets.VERCEL_TOKEN }}
       - name: deploy
         id: dep
-        run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN }}  echo 'data=value' >> $GITHUB_OUTPUT ';'
+        run: vercel deploy --prebuilt --token=${{secrets.VERCEL_TOKEN }}
       - name: Output information
-        run: echo "${{steps.dep.outputs.data}}"
+        run: echo "${{ toJSON(github) }}"
