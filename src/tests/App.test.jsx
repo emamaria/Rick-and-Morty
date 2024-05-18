@@ -32,7 +32,6 @@ describe('test <App/>', () => {
         render(<App/>)
         const buttonNext = screen.getByText(Next)
         fireEvent.click(buttonNext)
-        screen.debug()
         expect(screen.getByText(Prev)).toBeTruthy()
         
     })
