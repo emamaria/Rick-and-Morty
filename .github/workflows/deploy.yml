@@ -6,7 +6,8 @@ env:
 
 on:
   push:
-    branches: -main
+    branches:
+      - main
 
 jobs:
   lint:
@@ -18,11 +19,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: dep-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
         run: npm ci
       - name: Run linter
         run: npm run lint
   jest-run:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -31,11 +38,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: dep-${{hashFiles('**/package-lock.json')}}
       - name: Install Dependencies
         run: npm ci
       - name: Test code
         run: npm run test
   cypress-run:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -46,7 +59,7 @@ jobs:
           build: npm run build
           start: npm start
   build-deploy:
-    needs: [lint, jest-run, cypress-run]
+    needs: [jest-run, cypress-run]
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -58,4 +71,5 @@ jobs:
       - name: build
         run: vercel build --prod --token=${{secrets.VERCEL_TOKEN }}
       - name: deploy
+        id: dep
         run: vercel deploy --prebuilt --prod --token=${{secrets.VERCEL_TOKEN }}
