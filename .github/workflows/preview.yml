@@ -28,6 +28,7 @@ jobs:
       - name: Run linter
         run: npm run lint
   jest-run:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -46,6 +47,7 @@ jobs:
       - name: Test code
         run: npm run test
   cypress-run:
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Get code
@@ -56,7 +58,7 @@ jobs:
           build: npm run build
           start: npm start
   deploy-preview:
-    needs: [lint, jest-run, cypress-run]
+    needs: [jest-run, cypress-run]
     runs-on: ubuntu-latest
     steps:
       - name: Get code
